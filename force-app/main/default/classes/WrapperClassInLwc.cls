@@ -10,7 +10,7 @@ public with sharing class WrapperClassInLwc {
            List<Account> acclist=[SELECT id,Name,Type,BillingStreet,BillingCity,BillingCountry,BillingPostalCode,BillingState FROM Account Where Name != null ORDER BY Name LIMIT 20 ];
         for(Account acc:acclist){
             listAccountWrapper.add(new AccountWrapperclass(acc));
-            system.debug('this is madhav ')
+            system.debug('this is madhav ');
         }
         return listAccountWrapper;
     
