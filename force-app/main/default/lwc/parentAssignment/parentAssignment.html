@@ -1,0 +1,8 @@
+<template>
+    <lightning-card title="Parent Component" icon-name="custom:custom7">
+        <lightning-combobox label="country"
+                             options={countries}
+                           onchange={ChangeStates}></lightning-combobox>
+     <c-child-assignment get-states-from-parent={states} ></c-child-assignment>
+    </lightning-card>
+</template>

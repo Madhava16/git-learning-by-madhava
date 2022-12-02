@@ -1,0 +1,21 @@
+<template>
+    <lightning-card title="Record Edit From">
+        <lightning-record-edit-form object-api-name={objectApiName}
+                                 onsuccess={handleSuccess}
+                                    density="Compact">
+          <lightning-input-field field-name="Id" value={ContactId}></lightning-input-field> 
+          <lightning-input-field field-name={Name} value={Name}></lightning-input-field>
+          <lightning-input-field field-name={Phone} value={Phone}></lightning-input-field>
+          <lightning-input-field field-name={LeadSource} value={LeadSource}></lightning-input-field>
+          
+      
+            <lightning-button label="Submit" variant="brand" type="submit" onclick={handleSuccess} disabled={showSubmit}></lightning-button>
+       
+
+       
+            <lightning-button label="New Account" variant="success" onclick={createNewAccount} disabled={showNewAcc}></lightning-button>
+        
+
+        </lightning-record-edit-form>
+    </lightning-card>
+</template>

@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="parent" icon-name="custom:custom29">
+        <lightning-input type="number" label="Quantity" name="Quantity" onchange={handleChange}></lightning-input>
+        <lightning-input type="number" label="Price" name="price"  onchange={handleChange}></lightning-input>
+
+
+      <lightning-button label="total" varient="brand" onclick={Total}></lightning-button>
+      <lightning-button label="tax" varient="brand" onclick={Tax}></lightning-button>
+ 
+   <c-total-child sum={total}></c-total-child>
+ 
+    </lightning-card>
+</template>

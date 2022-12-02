@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Create Record With Apex">
+      <lightning-input label="Enter Account Name" name="accName"  type="text" value={conRecord.LastName} data-apiname="LastName" onchange={handleChangeInput}></lightning-input>
+      <lightning-input label="Enter Phone Number" name="accPhone" type="number" value={conRecord.Phone} data-apiname="Phone" onchange={handleChangeInput}></lightning-input>
+      
+      <lightning-button label="Submit" onclick={handleSave} variant="brand"></lightning-button>
+      
+      <!-- <lightning-input label="id" disabled value={contactId}></lightning-input>
+      <lightning-input label="Last Name" onchange={handleChange} data-apiname="Last Name" class="input"></lightning-input>
+      <lightning-input label="Phone" onchange={handleChange1} data-apiname="Phone" class="input"></lightning-input>
+      <lightning-input label="LeadSource" onchange={handleLeadSource} data-apiname="LeadSource" class="input"> </lightning-input>
+      <lightning-button label="Create a Record" onclick={handleCreate} ></lightning-button> -->
+    </lightning-card>
+</template>

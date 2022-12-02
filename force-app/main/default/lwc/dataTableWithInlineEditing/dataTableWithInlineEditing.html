@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="dataTable With InlineEditing ">
+   <lightning-datatable key-field="Id"
+                        data={data}
+                        show-row-number-column
+                        draft-values={saveDraftValues}
+                        onsave={handleSave}
+                        hide-checkbox-column
+                        columns={columns}></lightning-datatable>
+
+
+
+
+    </lightning-card>
+</template>

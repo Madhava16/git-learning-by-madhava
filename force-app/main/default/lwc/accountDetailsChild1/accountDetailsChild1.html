@@ -1,0 +1,44 @@
+<!-- <template>
+
+    <template if:true={allFields} for:each={allFields} for:item="field">
+
+    <div class="slds-grid slds-wrap" key={con}>
+        <div class="slds-col slds-size_5-of-12">
+            <lightning-input type="text" variant="standard" data-apiname={field} label={field} class="input  slds-var-m-around_small" required="true"></lightning-input>
+        </div>
+        <div class="slds-col slds-size_5-of-12">
+            <lightning-input type="text" variant="standard" data-apiname="AccountNumber" label="Account Number" class="input  slds-var-m-around_small"></lightning-input>
+        </div> 
+    </div>
+
+</template>
+
+
+</template> -->
+
+
+<template>
+    <lightning-card>
+    <!-- <lightning-record-edit-form object-api-name="Account">   -->
+        
+        <template if:true={allFields} for:each={allFields} for:item="act">
+            
+            <div key={act} class="slds-col">
+                <div>
+                    <lightning-input data-apiname={act} label={act} class="input  slds-var-m-around_small"></lightning-input>
+                </div>
+            </div>
+
+        </template>
+
+                  <!-- <div align="center"> 
+
+                    <lightning-button variant="success" type="submit" label="Save"></lightning-button>
+                    &nbsp;&nbsp;&nbsp;
+                    <lightning-button variant="destructive" label="Cancel" onclick={handleError}></lightning-button>
+
+                </div> -->
+				
+	<!-- </lightning-record-edit-form> -->
+</lightning-card>
+</template>

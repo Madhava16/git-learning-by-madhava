@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Patient List ">
+        <lightning-record-edit-form>
+        <template for:each={Patientlist} for:item="ptli">
+       <li key={ptli.id}>
+           My nimhans patients list is <br>
+           Patient :{ptli.id}  Name:{ptli.Name} 
+           <br>
+        </li>
+      
+    </template>
+    <lightning-button  label="Show" onclick={showhandlerlist}></lightning-button>
+</lightning-record-edit-form>
+    </lightning-card>
+</template>

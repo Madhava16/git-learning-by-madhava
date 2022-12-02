@@ -1,0 +1,527 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <!-- <lightning-layout>
+        <lightning-layout-item size={layoutSize} class="slds-var-m-around_small"> -->
+    <template if:true={loading}>
+        <div class="slds-is-relative custom-height">
+            <lightning-spinner variant="brand" alternative-text="Loading..." label="Loading..."> </lightning-spinner>
+        </div>
+    </template>
+    <template if:false={loading}>
+        <!-- <template if:true={isWholePageView}> -->
+        <lightning-card>
+            <div class="slds-var-p-around_small">
+                <!-- <img src={url} > -->
+                <!-- <lightning-layout class="slds-var-m-around_x-small">
+                    <lightning-layout-item flexibility="auto" size="4">
+                        <h2 style="font-weight: bold;" class="slds-text-heading_small">Portal News</h2>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="8">
+                        <lightning-button-icon class="slds-float_right" icon-name="utility:refresh" onclick={refreshNow} alternative-text="refresh" title="Refresh Messages" label="Refresh" size="small" variant="border-filled"></lightning-button-icon>
+                        <lightning-combobox value={typeValue} options={comboBoxTypes} onchange={handleTypeChange}
+                            label="Filter">
+                        </lightning-combobox>
+                    </lightning-layout-item>
+                </lightning-layout> -->
+                <!-- <div class="slds-grid">
+                    <div class="slds-col slds-size_4-of-12">
+                        <p class="slds-var-m-bottom_medium headingWithUnderLine ">NEWS</p>
+                    </div>
+                    <div class="slds-col slds-size_8-of-12 ">
+                        <lightning-button-icon class="slds-float_right" icon-name="utility:refresh" onclick={refreshNow} alternative-text="refresh" title="Refresh Messages" label="Refresh" size="small" variant="border-filled"></lightning-button-icon>
+                        <lightning-combobox value={typeValue} class="slds-var-m-bottom_medium" variant="label-hidden" options={comboBoxTypes} onchange={handleTypeChange}
+                            label="Filter">
+                        </lightning-combobox>
+                    </div>
+                </div> -->
+                <template if:true={isThereItem}>
+                    
+                        <lightning-layout>
+                            <!-- <lightning-layout-item size="1" class="slds-align_absolute-center"  >
+                                            <template if:true={showPreviousButton}>
+                                                <button class="btnNextStyle slds-var-m-right_small" onclick={handlePrevious}>
+                                                    <lightning-icon icon-name="utility:chevronleft" alternative-text="Previous" title="Previous" size="x-small" ></lightning-icon>
+                                                </button>    
+                                            </template>
+                                        </lightning-layout-item> -->
+                            <lightning-layout-item flexibility="grow" style="width: -webkit-fill-available;">
+                                <p class="slds-var-m-bottom_medium headingWithUnderLine ">NEWS</p>
+                                <template if:true={showSearchBar}>
+                                    <lightning-input
+                                        name="enter-search"
+                                        label="Search for article"
+                                        type="search"
+
+                                        class="slds-var-m-around_small"
+                                        onchange= {handleArticleSearch}
+                                    ></lightning-input>
+                                </template>
+                            <template if:true={isSearchedDataAvailable}>
+                                <div class="cardWithShadow ">
+                                    <template for:each={portalFeedItemsList} for:item="portalFeedItem">
+                                        <!-- each row starts -->
+                                        <div key={portalFeedItem} style="border: 0.1px solid rgba(102, 98, 98, 0.322); width:inherit;cursor: pointer;" class="slds-grid slds-wrap slds-grid_align-spread" onclick={handleNavigate} data-id={portalFeedItem.Id} >
+                                            <!-- image starts -->
+                                            <template if:true={displayThumbnailInFeed}>
+                                                <template if:true={portalFeedItem.isImageAvailable}>
+                                                    <div class="slds-grid slds-col slds-size_3-of-12 slds-var-p-around_small">
+                                                        <!-- <header class="slds-media slds-media_center slds-has-flexi-truncate"> -->
+                                                        <div class="slds-media__body" >
+                                                                <!-- <div class="slds-grid"> -->
+                                                                    <span >
+                                                                        <img src={portalFeedItem.imageUrl} alt="" >
+                                                                        <!-- {portalFeedItem.Id} -->
+                                                                    </span>
+                                                                <!-- </div> -->
+                                                            
+                                                            
+                                                        </div>
+                                                        <!-- </header> -->
+                                                    </div>
+                                                </template>
+                                            </template>
+                                            <!-- image ends -->
+                                            <!-- titles start -->
+                                            <div class="slds-grid_vertical slds-col slds-size_7-of-12 slds-var-p-around_small slds-grid_align-spread">
+                                                <h2 class="black-bold-text slds-col"  title={portalFeedItem.Title}>
+                                                    <span style="text-overflow: ellipsis; white-space: nowrap;overflow: hidden;" class="slds-var-m-vertical_small">{portalFeedItem.Title}</span>
+                                                </h2>
+                                                <template if:true={portalFeedItem.showSubtitle}>
+                                                    <div class=" detail-text-extra-small  slds-col slds-var-m-vertical_small">
+                                                        {portalFeedItem.subtitle}
+                                                    </div>
+                                                </template>
+                                                <template if:false={portalFeedItem.showSubtitle}>
+                                                    <div class=" detail-text-extra-small  showLess slds-col slds-var-m-vertical_small">
+                                                        {portalFeedItem.Body}
+                                                    </div>
+                                                </template>
+                                            </div>
+                                            <!-- title ends -->
+                                            <!-- date start -->
+                                            <div class="slds-float_right slds-col slds-size_2-of-12 slds-var-p-around_small">
+                                                <span class="slds-text-color_weak slds-var-m-around_medium  detail-text-extra-small" style="font-size: smaller; ">
+                                                    {portalFeedItem.date}
+                                                    <!-- <lightning-formatted-date-time 
+                                                                        value={portalFeedItem.date}
+                                                                        class="slds-var-m-left_small"
+                                                                        year="numeric" month="short" 
+                                                                        day="numeric" 
+                                                                        
+                                                                    >
+                                                                    </lightning-formatted-date-time> -->
+                                                </span>
+                                            </div>
+                                            <!-- date ends -->
+                                        </div>
+                                        <!-- each row ends -->
+                                        <!-- <div key={portalFeedItem} style="border: 0.2px solid rgba(61, 60, 60, 0.425);" >
+                                                            <lightning-card class="slds-var-m-around_small">
+                                                                <lightning-layout multiple-rows="true">
+                                                                    <lightning-layout-item size="12" >
+                                                                        <div ><p onclick={openNews} data-id={portalFeedItem.Id} class="slds-text-heading_medium slds-text-title_bold">{portalFeedItem.Title}</p></div>
+                                                                    </lightning-layout-item>
+                                                                    <lightning-layout-item size="12" class="slds-var-m-around_small">
+                                                                        <img src={portalFeedItem.imageUrl} alt="Image" height="200" width="250">
+                                                                    </lightning-layout-item>
+                                                                    <lightning-layout-item size="12" >
+                                                                        <lightning-formatted-rich-text 
+                                                                            value={portalFeedItem.Body} 
+                                                                            data-id={portalFeedItem.Id}
+                                                                            class="showLess"
+                                                                        ></lightning-formatted-rich-text>
+                                                                        <p class="showLess">{portalFeedItem.Body}</p>
+                                                                        <template if:true={portalFeedItem.showReadMore}>
+                                                                            <button style="border-radius:30px; background-color:rgba(204, 245, 255, 0.87);" class="slds-button slds-button_neutral slds-var-m-top_x-small" title="Read More..." data-id={portalFeedItem.Id}  onclick={showFull}>Read More...</button>
+                                                                            <lightning-button variant="base" label="Read More..." title="Read More..." data-id={portalFeedItem.Id}  onclick={showFull}></lightning-button> 
+                                                                        </template>
+                                                                    </lightning-layout-item>
+                                                                </lightning-layout>
+                                                            </lightning-card> 
+                                                        </div> -->
+                                    </template>
+                                </div>
+                                <template if:true={showButtons}>
+                                    <div class="slds-grid slds-grid_align-center slds-var-m-top_small">
+                                        <template for:each={pageIcons} for:item="icon">
+                                            <div class="slds-col" key={icon}>
+                                                <template if:true={icon.show}>
+                                                    <span class="slds-carousel__indicator">
+                                                        <a class="slds-carousel__indicator-action slds-is-active"></a>
+                                                    </span>
+                                                    <!-- <lightning-button-icon icon-name="utility:record" class="btnIcon" size="large" variant="bare" ></lightning-button-icon> -->
+                                                </template>
+                                                <template if:false={icon.show}>
+                                                    <span class="slds-carousel__indicator">
+                                                        <a class="slds-carousel__indicator-action " data-id={icon.value}
+                                                            onclick={handleGoToNumber}></a>
+                                                    </span>
+                                                    <!-- <lightning-button-icon  icon-name="utility:record"  size="medium" variant="bare"  value={icon.value} onclick={handleGoToNumber}></lightning-button-icon> -->
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </template>
+                                <template if:false={showButtons}>
+                                    <div class="slds-grid slds-grid_align-space slds-var-m-top_small">
+                                        <div class="slds-col">
+                                            <lightning-button label="Previous" disabled={showPreviousButton}
+                                                onclick={handlePrevious}></lightning-button>
+                                        </div>
+                                        <div class="slds-col">
+                                            <lightning-button label="Next" disabled={showNextButton} onclick={handleNext}>
+                                            </lightning-button>
+                                        </div>
+                                    </div>
+                                </template>
+                            </template>
+                            <template if:false={isSearchedDataAvailable}>
+                                <!-- <p class="slds-text-heading_medium slds-var-m-bottom_medium headingWithUnderLine">NEWS</p> -->
+                                <div class="slds-text-heading_small cardWithShadow slds-text-align_center slds-var-p-around_small">
+                                    No Feed Items.
+                                </div>
+                            </template>
+                            </lightning-layout-item>
+                            <!-- <lightning-layout-item size="1" class="slds-align_absolute-center" >
+                                            <template if:true={showNextButton}>
+                                                    <div class="slds-align_absolute-center" >
+                                                    <button class="btnNextStyle slds-var-m-left_small" onclick={handleNext}>
+                                                        <lightning-icon icon-name="utility:chevronright" alternative-text="Next" title="Next" size="x-small" ></lightning-icon>
+                                                    </button>
+                                                    </div>
+                                            </template>
+                                        </lightning-layout-item> -->
+                        </lightning-layout>
+                        <template if:true={isModalOpen}>
+                            <!-- Modal/Popup Box LWC starts here -->
+                            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                                <div class="slds-modal__container">
+                                    <!-- Modal/Popup Box LWC header here -->
+                                    <!-- <header class="slds-modal__header">
+                                                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                                                        <lightning-icon icon-name="utility:close"
+                                                            alternative-text="close"
+                                                            variant="inverse"
+                                                            size="small" ></lightning-icon>
+                                                        <span class="slds-assistive-text">Close</span>
+                                                    </button>
+                                                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate"></h2>
+                                                </header> -->
+                                    <!-- Modal/Popup Box LWC body starts here -->
+                                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                        title="Close" onclick={closeModal}>
+                                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                            size="small"></lightning-icon>
+                                        <span class="slds-assistive-text">Close</span>
+                                    </button>
+                                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                        <template if:true={modalLoader}>
+                                            <div class="slds-is-relative custom-height"
+                                                style="position: absolute; top:50%; left:50%;">
+                                                <lightning-spinner variant="brand" alternative-text="Loading..."
+                                                    label="Loading..."> </lightning-spinner>
+                                            </div>
+                                        </template>
+                                        <template if:true={articleId}>
+                                            <c-article-main-component article-id={articleId}></c-article-main-component>
+                                        </template>
+                                    </div>
+                                    <!-- Modal/Popup Box LWC footer starts here -->
+                                    <footer class="slds-modal__footer">
+                                        <button class="slds-button slds-button_neutral" onclick={closeModal}
+                                            title="Close">Close</button>
+                                        <!-- <button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">OK</button> -->
+                                    </footer>
+                                </div>
+                            </section>
+                            <div class="slds-backdrop slds-backdrop_open"></div>
+                        </template>
+                        <!-- <lightning-layout>
+                                        <lightning-layout-item flexibility="auto"  class="slds-var-p-around_small" size="2">
+                                            <lightning-combobox
+                                                options={gotoNumberComboBox}
+                                                value={gotoNumber}
+                                                onchange={handleGoToNumber}
+                                            ></lightning-combobox>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item flexibility="auto"  class="slds-var-p-around_small" size="2">
+                                            <lightning-combobox
+                                                options={pageNumbers}
+                                                value={pageSize}
+                                                onchange={handlePageSize}
+                                            ></lightning-combobox>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item flexibility="auto"  class="slds-var-p-around_small slds-var-m-top_xx-large" size="3">
+                                            {currentPageNumber}
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                    <template if:true={showButtons}>
+                                        <lightning-layout>
+                                            <lightning-layout-item flexibility="auto"  class="slds-var-p-around_small" size="8"></lightning-layout-item>
+                                            <lightning-layout-item flexibility="auto"   size="1">
+                                                <lightning-button  label='First' variant="base" disabled={showPreviousButton} onclick={handleFirst} icon-name="utility:back"  ></lightning-button>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item flexibility="auto"  size="1">
+                                                <lightning-button  label='Previous' variant="base" disabled={showPreviousButton} onclick={handlePrevious}></lightning-button>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item flexibility="auto"  size="1">
+                                                <lightning-button label='Next' variant="base" disabled={showNextButton} onclick={handleNext}></lightning-button>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item flexibility="auto"  size="1">
+                                                <lightning-button label='Last' variant="base" disabled={showNextButton} onclick={handleLast} icon-name="utility:forward" icon-position="right" ></lightning-button>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </template> -->
+                </template>
+                <template if:false={isThereItem}>
+                    <!-- <p class="slds-text-heading_medium slds-var-m-bottom_medium headingWithUnderLine">NEWS</p> -->
+                    <div class="slds-text-heading_small cardWithShadow slds-text-align_center slds-var-p-around_small">
+                        No Feed Items.
+                    </div>
+                </template>
+            </div>
+        </lightning-card>
+        <!-- </template> -->
+        <!-- <template if:true={isOneThree}>
+                    <lightning-card>
+                        <div class="slds-var-m-around_large">
+                            <lightning-layout class="slds-var-m-around_x-small">
+                                <lightning-layout-item flexibility="auto" size="6">
+                                    <h2 style="font-weight: bold;" class="slds-text-heading_small">Portal News</h2>
+                                </lightning-layout-item>
+                                <lightning-layout-item flexibility="auto" size="6">
+                                    <lightning-button-icon class="slds-float_right" icon-name="utility:refresh" onclick={refreshNow} alternative-text="refresh" title="Refresh Messages" label="Refresh" size="small" variant="border-filled"></lightning-button-icon>
+                                    <lightning-combobox
+                                        value={typeValue}
+                                        options={typeFiltersForComboBox}
+                                        onchange={handleTypeChange}
+                                        label="Filter"
+                                    >
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <template if:true={isThereItem}>
+                                <template for:each={portalFeedItemsList} for:item="portalFeedItem">
+                                    <div key={portalFeedItem}>
+                                        <lightning-card>
+                                            <lightning-layout multiple-rows="true">
+                                                <lightning-layout-item size="12" class="slds-var-m-around_small">
+                                                    <div class="slds-text-heading_small"><a href="#" style="text-decoration: none;">{portalFeedItem.Title}</a></div>
+                                                </lightning-layout-item>
+                                                <lightning-layout-item size="12" class="slds-var-m-around_small">
+                                                    <img src={portalFeedItem.imageUrl} alt="Image" height="100" width="150">
+                                                </lightning-layout-item>
+                                                <lightning-layout-item size="12" class="slds-var-m-around_small">
+                                                    <lightning-formatted-rich-text 
+                                                        value={portalFeedItem.Body} 
+                                                        data-id={portalFeedItem.Id}
+                                                        style="max-height: 40px; 
+                                                                display: -webkit-box; 
+                                                                overflow-wrap: break-word;
+                                                                overflow: hidden;"
+                                                    ></lightning-formatted-rich-text>
+                                                    <template if:true={portalFeedItem.showReadMore}>
+                                                        <button style="border-radius:30px; background-color:rgba(204, 245, 255, 0.87);" class="slds-button slds-button_neutral slds-var-m-top_x-small" title="Read More..." data-id={portalFeedItem.Id}  onclick={showFull}>Read More...</button>
+                                                        <lightning-button variant="base" label="Read More..." title="Read More..." data-id={portalFeedItem.Id}  onclick={showFull}></lightning-button> 
+                                                    </template>
+                                                </lightning-layout-item>
+                                            </lightning-layout>
+                                        </lightning-card> <hr />
+                                    </div>
+                                </template>
+                                <template if:true={showButtons}>
+                                    <lightning-layout>
+                                        <lightning-layout-item flexibility="auto"  class="slds-var-p-around_small" size="2"></lightning-layout-item>
+                                        <lightning-layout-item flexibility="auto"   size="2">
+                                            <lightning-button  label='First' variant="base" disabled={showPreviousButton} onclick={handleFirst} icon-name="utility:back"  ></lightning-button>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item flexibility="auto"  size="2">
+                                            <lightning-button  label='Previous' variant="base" disabled={showPreviousButton} onclick={handlePrevious}></lightning-button>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item flexibility="auto"  size="2">
+                                            <lightning-button label='Next' variant="base" disabled={showNextButton} onclick={handleNext}></lightning-button>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item flexibility="auto"  size="2">
+                                            <lightning-button label='Last' variant="base" disabled={showNextButton} onclick={handleLast} icon-name="utility:forward" icon-position="right" ></lightning-button>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item flexibility="auto"  class="slds-var-p-around_small" size="2"></lightning-layout-item>
+                                    </lightning-layout>
+                                </template>
+                            </template>
+                            <template if:false={isThereItem}>
+                                <div class="slds-text-heading_small slds-text-align_center slds-var-p-around_small">
+                                    No Feed Items.
+                                </div>
+                            </template>
+                        </div>
+                    </lightning-card>
+                </template> -->
+        <!-- <template if:true={isTwoThree}>
+                    <lightning-card>
+                        <div class="slds-var-m-around_large">
+                            <lightning-layout class="slds-var-m-around_x-small">
+                                <lightning-layout-item flexibility="auto" size="6">
+                                    <h2 style="font-weight: bold;" class="slds-text-heading_small">Portal News</h2>
+                                </lightning-layout-item>
+                                <lightning-layout-item flexibility="auto" size="6">
+                                    <lightning-button-icon class="slds-float_right" icon-name="utility:refresh" onclick={refreshNow} alternative-text="refresh" title="Refresh Messages" label="Refresh" size="small" variant="border-filled"></lightning-button-icon>
+                                    <lightning-combobox
+                                        value={typeValue}
+                                        options={typeFiltersForComboBox}
+                                        onchange={handleTypeChange}
+                                        label="Filter"
+                                    >
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <template if:true={isThereItem}>
+                                <template for:each={portalFeedItemsList} for:item="portalFeedItem">
+                                    <div key={portalFeedItem}>
+                                        <lightning-card>
+                                            <lightning-layout multiple-rows="true">
+                                                <lightning-layout-item size="12" class="slds-var-m-around_small">
+                                                    <div class="slds-text-heading_medium"><a href="#" style="text-decoration: none;">{portalFeedItem.Title}</a></div>
+                                                </lightning-layout-item>
+                                                <lightning-layout-item size="12" class="slds-var-m-around_small">
+                                                    <img src={portalFeedItem.imageUrl} alt="Image" height="150" width="200">
+                                                </lightning-layout-item>
+                                                <lightning-layout-item size="12" class="slds-var-m-around_small">
+                                                    <lightning-formatted-rich-text 
+                                                        value={portalFeedItem.Body} 
+                                                        data-id={portalFeedItem.Id}
+                                                        style="max-height: 40px; 
+                                                                display: -webkit-box; 
+                                                                overflow-wrap: break-word;
+                                                                overflow: hidden;"
+                                                    ></lightning-formatted-rich-text>
+                                                    <template if:true={portalFeedItem.showReadMore}>
+                                                        <button style="border-radius:30px; background-color:rgba(204, 245, 255, 0.87);" class="slds-button slds-button_neutral slds-var-m-top_x-small" title="Read More..." data-id={portalFeedItem.Id}  onclick={showFull}>Read More...</button>
+                                                        <lightning-button variant="base" label="Read More..." title="Read More..." data-id={portalFeedItem.Id}  onclick={showFull}></lightning-button> 
+                                                    </template>
+                                                </lightning-layout-item>
+                                            </lightning-layout>
+                                        </lightning-card> <hr />
+                                    </div>
+                                </template>
+                                <lightning-layout>
+                                    <lightning-layout-item flexibility="auto"  class="slds-var-p-around_small" size="2">
+                                        <lightning-combobox
+                                            options={gotoNumberComboBox}
+                                            value={gotoNumber}
+                                            onchange={handleGoToNumber}
+                                        ></lightning-combobox>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item flexibility="auto"  class="slds-var-p-around_small" size="2">
+                                        <lightning-combobox
+                                            options={pageNumbers}
+                                            value={pageSize}
+                                            onchange={handlePageSize}
+                                        ></lightning-combobox>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item flexibility="auto"  class="slds-var-p-around_small slds-var-m-top_xx-large" size="3">
+                                        {currentPageNumber}
+                                    </lightning-layout-item>
+                                </lightning-layout><br />
+                                <template if:true={showButtons}>
+                                    <lightning-layout>
+                                        <lightning-layout-item flexibility="auto"  class="slds-var-p-around_small" size="7"></lightning-layout-item>
+                                        <lightning-layout-item flexibility="auto"   size="1">
+                                            <lightning-button  label='First' variant="base" disabled={showPreviousButton} onclick={handleFirst} icon-name="utility:back"  ></lightning-button>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item flexibility="auto"  size="1">
+                                            <lightning-button  label='Previous' variant="base" disabled={showPreviousButton} onclick={handlePrevious}></lightning-button>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item flexibility="auto"  size="1">
+                                            <lightning-button label='Next' variant="base" disabled={showNextButton} onclick={handleNext}></lightning-button>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item flexibility="auto"  size="1">
+                                            <lightning-button label='Last' variant="base" disabled={showNextButton} onclick={handleLast} icon-name="utility:forward" icon-position="right" ></lightning-button>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item flexibility="auto"  class="slds-var-p-around_small" size="1"></lightning-layout-item>
+                                    </lightning-layout>
+                                </template>
+                            </template>
+                            <template if:false={isThereItem}>
+                                <div class="slds-text-heading_small slds-text-align_center slds-var-p-around_small">
+                                    No Feed Items.
+                                </div>
+                            </template>
+                        </div>
+                    </lightning-card>
+                </template> -->
+        <!-- <template if:true={isSingleTile}>
+                    <lightning-card>
+                        <div class="slds-var-m-around_large">
+                            <lightning-layout class="slds-var-m-around_x-small">
+                                <lightning-layout-item flexibility="auto" size="6">
+                                    <h2 style="font-weight: bold;" class="slds-text-heading_small">Portal News</h2>
+                                </lightning-layout-item>
+                                <lightning-layout-item flexibility="auto" size="6">
+                                    <lightning-button-icon class="slds-float_right" icon-name="utility:refresh" onclick={refreshNow} alternative-text="refresh" title="Refresh Messages" label="Refresh" size="small" variant="border-filled"></lightning-button-icon>
+                                    <lightning-combobox
+                                        value={typeValue}
+                                        options={typeFiltersForComboBox}
+                                        onchange={handleTypeChange}
+                                        label="Filter"
+                                    >
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <template if:true={isThereItem}>
+                                <template for:each={portalFeedItemsList} for:item="portalFeedItem">
+                                    <div key={portalFeedItem}>
+                                        <lightning-card>
+                                            <lightning-layout multiple-rows="true">
+                                                <lightning-layout-item size="12" class="slds-var-m-around_small">
+                                                    <div class="slds-text-heading_small"><a href="#" style="text-decoration: none;">{portalFeedItem.Title}</a></div>
+                                                </lightning-layout-item><br />
+                                                <lightning-layout-item size="12" class="slds-var-m-around_small">
+                                                    <lightning-formatted-rich-text 
+                                                        value={portalFeedItem.Body} 
+                                                        data-id={portalFeedItem.Id}
+                                                        style="max-height: 40px; 
+                                                                display: -webkit-box; 
+                                                                overflow-wrap: break-word;
+                                                                overflow: hidden;"
+                                                    ></lightning-formatted-rich-text>
+                                                    <template if:true={portalFeedItem.showReadMore}>
+                                                        <button style="border-radius:30px; background-color:rgba(204, 245, 255, 0.87);" class="slds-button slds-button_neutral slds-var-m-top_x-small" title="Read More..." data-id={portalFeedItem.Id}  onclick={showFull}>Read More...</button>
+                                                        <lightning-button variant="base" label="Read More..." title="Read More..." data-id={portalFeedItem.Id}  onclick={showFull}></lightning-button> 
+                                                    </template>
+                                                </lightning-layout-item>
+                                            </lightning-layout> <hr />
+                                        </lightning-card>
+                                    </div>
+                                </template>
+                                <template if:true={showButtons}>
+                                    <lightning-layout>
+                                        <lightning-layout-item flexibility="auto"  class="slds-var-p-around_small" size="2"></lightning-layout-item>
+                                        <lightning-layout-item flexibility="auto"   size="2">
+                                            <lightning-button  label='First' variant="base" disabled={showPreviousButton} onclick={handleFirst} icon-name="utility:back"  ></lightning-button>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item flexibility="auto"  size="2">
+                                            <lightning-button  label='Previous' variant="base" disabled={showPreviousButton} onclick={handlePrevious}></lightning-button>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item flexibility="auto"  size="2">
+                                            <lightning-button label='Next' variant="base" disabled={showNextButton} onclick={handleNext}></lightning-button>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item flexibility="auto"  size="2">
+                                            <lightning-button label='Last' variant="base" disabled={showNextButton} onclick={handleLast} icon-name="utility:forward" icon-position="right" ></lightning-button>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item flexibility="auto"  class="slds-var-p-around_small" size="2"></lightning-layout-item>
+                                    </lightning-layout>
+                                </template>
+                            </template>
+                            <template if:false={isThereItem}>
+                                <div class="slds-text-heading_small slds-text-align_center slds-var-p-around_small">
+                                    No Feed Items.
+                                </div>
+                            </template>
+                        </div>
+                    </lightning-card>
+                </template> -->
+    </template>
+    <!-- </lightning-layout-item>
+    </lightning-layout> -->
+</template>

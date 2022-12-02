@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="Quick Calculator">
+        <lightning-combobox label="Operations"
+                            value={value}
+                            options={options}
+                            onchange={handleChange} 
+                            name="process"                            >
+
+        </lightning-combobox>
+        <lightning-input type="number" label="Firstnumber" name="n1" placeholder="Enter a number" value={firstnumber} onchange={handle} max="9999"></lightning-input>
+       
+       
+        
+        <lightning-input type="number" label="Secondnumber" name="n1"  placeholder="Enter a number" value={secondnumber} onchange={handle1} max="9999"></lightning-input>
+     <lightning-button label="calcultor" onclick={handlechange1} variant="brand"></lightning-button> 
+    <c-qick-calculator-child resultgetfromparent={result}></c-qick-calculator-child>
+    </lightning-card>
+</template>

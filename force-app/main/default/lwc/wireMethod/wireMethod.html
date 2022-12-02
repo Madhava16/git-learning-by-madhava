@@ -1,0 +1,17 @@
+<template>
+  <lightning-card title="wire method">
+    <!-- <template if:true={contacts}>
+        <template for:each={contacts} for:item="contact">
+            <p key={contact.Id}>{contact.Name}</p>
+        </template>
+    </template>
+    <template if:true={error}>
+        errors={error}
+    </template> -->
+    <lightning-datatable key-field="id"
+                          data={condata}
+                          columns={columns}>
+
+    </lightning-datatable>
+  </lightning-card>
+</template>

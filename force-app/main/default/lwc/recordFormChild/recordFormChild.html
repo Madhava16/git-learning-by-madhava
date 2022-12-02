@@ -1,0 +1,19 @@
+<template>
+    <template if:true={openViewForm}>
+
+        <div class="slds-p-around_large">
+
+        <lightning-record-view-form density="compact" object-api-name={caseApiName} record-id={recordId}>
+
+            <lightning-output-field field-name="CaseNumber"> </lightning-output-field>
+            <lightning-output-field field-name="Status"> </lightning-output-field>
+            <lightning-output-field field-name="Description"> </lightning-output-field>
+            <lightning-output-field field-name="Subject"> </lightning-output-field>
+
+        </lightning-record-view-form>
+
+    </div>
+
+
+    </template>
+</template>

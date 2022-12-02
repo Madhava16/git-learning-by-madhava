@@ -1,0 +1,87 @@
+<template>
+    <lightning-card title="Dynamic SOQL Query">
+        <template if:false={isLoading}>
+            <lightning-combobox
+            name="progress"
+            label="Selected SObject"
+            value={selectedSObject}
+            placeholder="Select any SObject"
+            options={allSObjectsMap}
+            onchange={handleChange}
+            required
+    ></lightning-combobox>
+        </template>
+        <template if:true={allfieldsAvailable}>
+            <p class="slds-var-m-vertical_medium">Selected sObject is: <b>{selectedSObject}</b></p>
+                        <div>
+                            <lightning-input type="number" placeholder="Limit" label="Limit" class="limitClass"></lightning-input>
+                        </div>
+                        <div>
+                            <lightning-combobox
+                            name="OrderBy"
+                            label="Order By"
+                            value={orderBy}
+                            placeholder="Order By"
+                            options={allFieldsMap}
+                            onchange={handleOrderByChange}
+                            ></lightning-combobox>
+                        </div>
+                        <div class="multiSelect">
+                            <lightning-checkbox-group name="Checkbox Group"
+                            label="All Fields"
+                            options={allFieldsMap}
+                            value={fieldValue}
+                            class="checkBoxGroup"
+                            onchange={handleFieldChange}>
+                            </lightning-checkbox-group>
+                            <lightning-button value="Query" class="slds-var-m-horizontal_medium" onclick={handleClick} label="Query" disabled={showButton}></lightning-button>
+                        </div>
+                    </template>
+                    <template if:true={isFieldsError}>
+                        <p>Some Error</p>
+                    
+                </div>
+            </template>
+            <template if:true={openModal}>
+                <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium" aria-labelledby="modal-heading-01" aria-modal="true">
+                    <div class="slds-modal__container">
+                        <div class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closeModal}>
+                                <lightning-icon icon-name="utility:close"
+                                alternative-text="close"
+                                variant="inverse"
+                                size="small" ></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Query Data</h1>
+                        </div>
+                        <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                            <template if:true={isDataAvailable}>
+                                <lightning-datatable
+                                    key-field="id"
+                                    data={queriedData}
+                                    show-row-number-column
+                                    hide-checkbox-column
+                                    columns={columnsList}
+                                    default-sort-direction={defaultSortDirection}
+                                    sorted-direction={sortDirection}
+                                    sorted-by={sortedBy}
+                                    onsort={onHandleSort}
+                                    onrowaction={handleRowAction}>
+                                </lightning-datatable>
+                            </template>
+                            <template if:false={isDataAvailable}>
+                                <p><b>No records available for the selected query.
+                                </b></p>
+                            </template>
+                        </div>
+                        <div class="slds-modal__footer">
+                            <button class="slds-button slds-button_brand" onclick={closeModal}>Close</button>
+                        </div>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

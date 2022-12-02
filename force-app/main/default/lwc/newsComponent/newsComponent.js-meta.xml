@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+       
+    </targets>
+    <!-- <targetConfigs>
+        <targetConfig targets="lightning__AppPage, lightningCommunity__Default"> -->
+            <!-- <property name="componentSize" type="String" default="Whole Page" label="Enter component size" datasource="Whole Page, 2/3rd of Page, 1/3rd of Page, Single Tile"/> -->
+            <!-- <property name="typeValue" type="String" default="Home Page" label="Select filter" datasource="Home Page, Launch Page, Historical News Articles"/> -->
+            <!-- <property name="dynamicTypeValue" label="Select filter" type="String" datasource="apex://DynamicPickListValueForNewsComp"  />
+            <property name="displayThumbnailInFeed" label="Display Thumbnail in Feed" type="Boolean"  />
+            <property name="displaySearchbar" label="Display Search bar" type="Boolean"  />
+            <property name="ignoreDates" label="Ignore Publication Date" type="Boolean" default="false" />
+        </targetConfig> -->
+        <!-- <targetConfig targets="lightning__AppPage, lightningCommunity__Default">
+        </targetConfig> -->
+      <!-- </targetConfigs> -->
+</LightningComponentBundle>

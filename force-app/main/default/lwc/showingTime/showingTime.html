@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Dispaly Time">
+        <div style="font-size: 20px; margin-left:200px">{timeval} </div>
+        <br><br>
+
+        <template if:true={startButton} >
+            <lightning-button label="start" variant="success" onclick={startHandler}></lightning-button>
+        </template>
+        <template if:false={startButton} >
+            <lightning-button label="stop" variant="destructive" onclick={stopHandler}></lightning-button>
+        </template>
+   
+        <lightning-button label="reset" variant="brand" onclick={resetHandler}></lightning-button>
+   
+    </lightning-card>
+</template>

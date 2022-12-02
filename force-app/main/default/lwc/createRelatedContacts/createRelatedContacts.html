@@ -1,0 +1,26 @@
+<template>
+    <lightning-card title="contact with related account">
+
+      <lightning-combobox   label="Accounts Available here"
+                                value={value}
+                                placeholder="Select an Account"
+                                options={options}
+                                onchange={handleChangecombo}>
+                            
+                            </lightning-combobox>
+
+                            
+
+   
+    
+<lightning-input label="Enter Account Name" name="accName"  type="text" data-apiname="LastName" value={conRecord.LastName}  onchange={handleChangeInput}></lightning-input>
+<lightning-input label="Enter Phone Number" name="accPhone" type="number" data-apiname="Phone" value={conRecord.Phone}  onchange={handleChangeInput}></lightning-input>
+ 
+       
+
+
+
+
+<lightning-button label="save" onclick={handleSave}></lightning-button>
+</lightning-card>
+</template>

@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Subscriber Component" icon-name="custom:custom19">
+
+        <div>
+            <b>Delivered from Publisher:</b>{message}
+        </div>
+        <div>
+            <p><b>To See user Details Here</b></p>
+          <b>username :</b>{userDetails.username}<br>
+          <b>email :</b>{userDetails.email}
+        </div>
+        <lightning-button label="send to publisher" onclick={sendPublisher}></lightning-button>
+    </lightning-card>
+</template>

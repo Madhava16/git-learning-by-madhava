@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="Calculator">
+    <lightning-record-edit-form>
+       
+        <lightning-input type="number" label="Firstnumber" name="n1" placeholder="Enter a number" value={firstnumber} onchange={handle}></lightning-input>
+        <lightning-input type="number" label="Secondnumber" name="n2"  placeholder="Enter a number" value={secondnumber} onchange={handle1}></lightning-input>
+        Result is:{result}<br/><br/>
+
+        <lightning-button onclick={add} label="add"></lightning-button>
+        <lightning-button onclick={sub} label="sub"></lightning-button>
+        <lightning-button onclick={mul} label="mul"></lightning-button>
+        <lightning-button onclick={div} label="div"></lightning-button>
+    </lightning-record-edit-form>
+<lightning-record-form>
+    
+</lightning-record-form>
+    
+    </lightning-card>
+</template>

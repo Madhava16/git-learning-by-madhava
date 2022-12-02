@@ -1,0 +1,20 @@
+<template>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_5-of-12">
+            <lightning-input type="text" variant="standard" data-apiname="LastName" label="Last Name" class="input slds-var-m-around_small" required="true"></lightning-input>
+        </div>
+        <div class="slds-col slds-size_5-of-12">
+            <lightning-input type="text" variant="standard" data-apiname="FirstName" label="First Name" class="input slds-var-m-around_small"></lightning-input>
+        </div>
+        <div class="slds-col slds-size_2-of-12">
+            <div style="margin-top: 2.4rem;">
+                <template if:true={showAddButton}>
+                    <lightning-button-icon variant="base" size="small" icon-name="utility:add" class="slds-var-m-around_small "  onclick={handleAddContact} ></lightning-button-icon>
+                </template>
+                <template if:true={showRemoveButton}>
+                    <lightning-button-icon variant="base" size="small" icon-name="utility:dash" class="slds-var-m-around_small "  onclick={handleRemoveContact} ></lightning-button-icon>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

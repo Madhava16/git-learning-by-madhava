@@ -1,0 +1,21 @@
+<template>
+   
+    <lightning-card>
+        
+        <div class="slds-grid" >
+            <div class="slds-col slds-p-horizontal_medium">
+           
+        <lightning-input required="true" label="LastName" name="contact"  type="text" data-apiname="LastName"  class="input"></lightning-input>
+        </div>
+        <div class="slds-col slds-p-horizontal_medium">
+        <lightning-input label="Phone" name="contact" type="number"  data-apiname="Phone"   ></lightning-input>
+    </div>
+   </div>
+  
+<div>
+     <lightning-button label="Add" variant="brand" onclick={handleClick}></lightning-button> 
+</div>
+
+</lightning-card> 
+
+   </template>

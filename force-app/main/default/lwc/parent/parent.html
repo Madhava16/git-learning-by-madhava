@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Account">
+        <c-child1 onaccountvalid={handleAccountValid} class="accountDetails"></c-child1>
+    </lightning-card>
+
+    <lightning-card>
+        <template for:each={recordList} for:item="records"> 
+            <c-child2 key={records} class="contactDetails" oncontactvalidation={handleContactValidation} onaddcon={handleAddCon}></c-child2>
+        </template>
+    </lightning-card>
+
+    <lightning-button label="save" type="submit" variant="brand" onclick={handleSave}></lightning-button>
+   
+</template> 

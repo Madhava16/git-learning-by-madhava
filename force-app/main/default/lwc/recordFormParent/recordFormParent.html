@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="Quick Case Search">
+          <lightning-input 
+          type="number"
+          onchange={handleCaseNoChange}
+          label="Search Case"
+          placeholder="Enter case number !"></lightning-input>
+
+<lightning-button
+          label="Search"
+          onclick={handleSearch}
+          variant="brand"
+>
+</lightning-button>
+
+<c-record-form-child></c-record-form-child>
+
+    </lightning-card>
+</template>

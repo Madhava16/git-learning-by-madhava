@@ -1,0 +1,10 @@
+<template>
+    <lightning-card title="Child" icon-name="custom:custom18">
+        <template if:true={details}>
+         <p> {details.Country}</p>  
+          <p> {details.Population}</p>
+          <p>  {details.President}</p>
+          <p>  {details.image}</p>
+        </template>
+    </lightning-card>
+</template>

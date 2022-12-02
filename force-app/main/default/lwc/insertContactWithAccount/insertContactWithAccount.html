@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="Insert Contact" icon-name="custom:custom63">
+        <div class="slds-m-around_large">
+            <lightning-combobox
+                name="Accounts"
+                label="Account"
+                placeholder="Select Account"
+                value={selectedAccount}
+                options={accountOptions}
+                onchange={handleAccounts}
+            >
+            </lightning-combobox>
+        </div>
+        <div class="slds-m-around_large">
+            <lightning-input type="text" label="First Name" placeholder="First Name" class="contactInput" onchange={handleInputChange} data-name="FirstName"></lightning-input>
+            <lightning-input type="text" label="Last Name" placeholder="Last Name" required="true" class="contactInput" onchange={handleInputChange} data-name="LastName"></lightning-input>
+            <lightning-input type="date" label="Date Of Birth" placeholder="Date Of Birth" required="true" class="contactInput" onchange={handleInputChange} data-name="Birthdate"></lightning-input>
+            <lightning-combobox
+                label="Designation"
+                class="contactInput"
+                placeholer="Designation"
+                options={designationOptions}
+                required="true"
+                data-name="Designation__c"
+                onchange={handleInputChange}
+            >
+            </lightning-combobox>
+            <br>
+            <lightning-button variant="brand-outline" label="Insert Contact" icon-name="utility:save" class="slds-m-left_x-small" onclick={handleSave}></lightning-button>
+            <br>
+        </div>
+    </lightning-card>
+</template>

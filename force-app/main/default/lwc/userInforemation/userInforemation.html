@@ -1,0 +1,29 @@
+<template>
+    <lightning-card title="My first LWC" icon-name="custom:custom4">
+    <lightning-layout vertical-align="center">
+    <lightning-layout-item padding="around-small">
+        <lightning-formatted-text value={firstname}></lightning-formatted-text>
+    </lightning-layout-item>
+</lightning-layout>
+<lightning-layout vertical-align="center">
+    <lightning-layout-item padding="around-small">
+        <lightning-formatted-text value={Lastname}></lightning-formatted-text>
+    </lightning-layout-item>
+</lightning-layout>
+<lightning-layout vertical-align="center">
+    <lightning-layout-item padding="around-small">
+        <lightning-formatted-email value={Email}></lightning-formatted-email>
+    </lightning-layout-item>
+</lightning-layout>
+<lightning-layout vertical-align="center">
+    <lightning-layout-item padding="around-small">
+        <lightning-formatted-phone value={phone}></lightning-formatted-phone>
+    </lightning-layout-item>
+</lightning-layout>
+<lightning-layout vertical-align="center">
+    <lightning-layout-item padding="around-small">
+        <lightning-button label="click" onclick={handleClick}></lightning-button>
+        </lightning-layout-item>
+        </lightning-layout>
+</lightning-card>
+</template>

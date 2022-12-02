@@ -1,0 +1,11 @@
+<template>
+   <lightning-card title="Caluculate Principal">
+      <lightning-input type="number" label="Enter principle Ammount" onchange={principleHandler}></lightning-input>
+      <lightning-input type="number" label="Enter No.of Years" onchange={yearsHandler}></lightning-input>
+      <lightning-input type="number" label="Enter Rate of Interst" onchange={rateHandler}></lightning-input>
+      <br><br>
+      <lightning-button label="calculate interest" onclick={calculateHandler}></lightning-button>
+       
+        <lightning-formatted-text value={TotalInterest}></lightning-formatted-text>
+   </lightning-card> 
+</template>

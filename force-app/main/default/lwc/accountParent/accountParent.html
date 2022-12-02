@@ -1,0 +1,20 @@
+<template>
+    <lightning-card >
+        <template if:true={showSpinner}>
+            <lightning-spinner alternative-text="Loading" size="large" style="left: -16rem;"></lightning-spinner>
+        </template>
+        <lightning-accordion allow-multiple-sections-open active-section-name={activeSections}>
+            <lightning-accordion-section name="Account" label="Account">
+                <c-account-details-child1 onaccountvalidated={handleAccountValidation} class="accountDetails"></c-account-details-child1>
+            </lightning-accordion-section>
+            <lightning-accordion-section name="Contact" label="Contact">
+                 <template if:true={numberOfContacts}> 
+                    <template for:each={numberOfContacts} for:item="eachCon">
+                        <c-contact-details-child2 key={eachCon} oncontactvalidated={handleContactValidation} class='testClass' con-key={eachCon.key} onaddcontact={handleAddContact} last-key={lastContactKey} onremovecontact={handleRemoveContact}></c-contact-details-child2>
+                    </template>
+                 </template> 
+            </lightning-accordion-section>
+        </lightning-accordion>
+        <lightning-button variant="brand" label="Save" title="Save" style="margin-left : 40%;" onclick={handleSave}></lightning-button>
+    </lightning-card>
+</template>

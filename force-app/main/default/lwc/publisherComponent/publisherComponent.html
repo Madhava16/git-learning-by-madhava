@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="Publisher Component" icon-name="custom:custom29">
+
+        <lightning-button label="Publisher" onclick={handleShow}></lightning-button>
+
+        <div>
+            <lightning-input label="username" type="text" class="forInput"></lightning-input>
+            <lightning-input label="Email" type="email" class="forInput"></lightning-input>
+        </div>
+        <div>
+            <lightning-button label="send Details" onclick={handleSendDetails}></lightning-button>
+        </div>
+        <lightning-button label="Subscribe" onclick={handleSubscribe}></lightning-button>
+        <div>
+          <b>  Delivered from Subscriber</b>{message}
+        </div>
+    </lightning-card>
+</template>

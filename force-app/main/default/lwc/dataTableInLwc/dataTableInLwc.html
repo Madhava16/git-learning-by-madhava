@@ -1,0 +1,21 @@
+<template>
+    <lightning-card title="data table">
+        <lightning-input type="search" 
+                         label="searched"
+                          onchange={handleChange}
+                           value={searchkey}>
+       </lightning-input>
+        <template if:true={booleanflag}>
+            <lightning-datatable key-field="id"
+                                 columns={columns}
+                                  data={data}
+                                  onrowaction={handleRowAction}>
+
+            </lightning-datatable>
+            <lightning-button label="hidetable" onclick={hideformHandler}></lightning-button>
+        </template>
+        <template if:false={booleanflag}>
+            <lightning-button label="showtable" onclick={showformHandler}></lightning-button>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,26 @@
+<template>
+    <template if:true={title}>
+        <div class="slds-m-around_medium">
+            <b>{title}</b>
+        </div>
+        <div class="slds-m-around_medium">
+            <img src={imgUrl}  width="100">
+        </div>
+        <div class="slds-m-around_medium">
+            <lightning-layout>
+                <lightning-layout-item flexibility="auto">
+                    <b>Original Price : {price} || Discount : {discount}</b>
+                    <br>
+                    <b>Price : {sellingPrice}</b>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto">
+                    <lightning-button label="Add to Cart" onclick={addProduct} icon-name="utility:cart"></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <div class="slds-m-around_medium">
+            <b>Description</b><br>
+            {description}
+        </div>
+    </template>
+    </template>

@@ -1,0 +1,14 @@
+<template>
+   <lightning-card title="Appication on student">
+    <template if:true={booleanflag}>
+         <lightning-input type="text" label="Firstname"></lightning-input>
+         <lightning-input type="text" label="Lastname"></lightning-input>
+         <lightning-input type="number" label="Mobile number"></lightning-input>
+         <lightning-input type="email" label="email"></lightning-input>
+        <lightning-button label="hideform" onclick={hideformHandler}></lightning-button>
+    </template>
+    <template if:false={booleanflag}>
+        <lightning-button label="showform" onclick={showformHandler}></lightning-button>
+    </template>
+</lightning-card>
+</template>

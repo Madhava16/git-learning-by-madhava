@@ -1,0 +1,39 @@
+<template>
+    <lightning-card title="Parent Component Example" icon-name="custom:custom43">
+        <lightning-layout>
+            <lightning-layout-item padding="around-medium" flexibility="no-shrink">
+                <div class="slds-m-around_large">
+                    <div class="slds-m-around_medium"> 
+                        <lightning-checkbox-group
+                                options={options}
+                                value={product}
+                                label="Products"
+                                onchange={handleChange}
+                        ></lightning-checkbox-group>
+                    </div>
+                    <br>
+                    <p>The added product are : </p>
+                    <div class="slds-m-around_medium">
+                        <ul class="slds-list_dotted slds-has-dividers_bottom slds-has-block-links_space">
+                            <template for:each={addedProducts} for:item="product">
+                                <li key={product} class="slds-item">{product.name} : {product.quantity}</li>
+                            </template>
+                        </ul>
+                        <template if:true={totalPrice}>
+                            <div class="slds-var-m-around_medium">
+                                <b>Total Price : {totalPrice}</b>
+                            </div>
+                        </template>
+                    </div>
+                 </div>
+            </lightning-layout-item>
+            <lightning-layout-item flexibility="auto">
+                <div class="slds-m-around_large">
+                    <c-cart-child class="childComponent" onaddtocart={addToCart}></c-cart-child>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+
+    
+</template>

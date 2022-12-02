@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="Paarent To Cild Relationship" icon-name="custom:custom14">
+        <div class="slds-m-around_medium">
+            <c-child-component1 class="childComponent"></c-child-component1>
+        </div>
+        <div class="slds-m-around_medium">
+            <c-child-component1 username="venkat" email="vencat@gmail.com" contact-number="6789054321"></c-child-component1>
+        </div>
+<hr/>
+<div>
+<lightning-input type="text" label="Enter userName" class="forInput"></lightning-input>
+<lightning-input type="Email" label="Enter userEmail" class="forInput"></lightning-input>
+<lightning-input type="Number" label="Enter userNumber" class="forInput"></lightning-input>
+<br>
+<lightning-button label="send to child" variant="brand" onclick={handleChild}></lightning-button>
+</div>
+    </lightning-card>
+</template>
