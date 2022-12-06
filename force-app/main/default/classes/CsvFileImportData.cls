@@ -16,7 +16,7 @@ public with sharing class CsvFileImportData {
     {
         system.debug('wrapperText:'+wrapperText);
         AccountWrapper wrapper=(AccountWrapper)JSON.deserialize(wrapperText,AccountWrapper.class);
-        system.debug('wrapper:'+wrapper);
+        system.debug('wrapper::'+wrapper);
         if(wrapper!=null)
         {
             Account act=new Account();
