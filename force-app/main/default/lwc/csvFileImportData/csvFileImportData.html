@@ -1,0 +1,143 @@
+
+<template>
+    <lightning-card title="Account with Contacts using wrapper class in LWC" icon-name="custom:custom63">
+        <div class="slds-m-around_medium">
+            <template if:true={accountsWithContacts}>
+                <template for:each={accountsWithContacts} for:item="accWithContacts">
+                    <div key={accWithContacts.accRecord.Id}>
+                        <div class="slds-text-heading_medium">{accWithContacts.accRecord.Name}</div>
+                        <!-- <template if:true={accWithContacts.contactList}>
+                            Contacts Count is {accWithContacts.contactCount}. Here is list:
+                            <ul class="slds-list_dotted">
+                                <template for:each={accWithContacts.contactList} for:item="con">
+                                    <li key={con.Id}>{con.Name}</li>
+                                </template>
+                            </ul>
+                        </template> -->
+                    </div>
+                </template>
+            </template>
+            <template if:true={error}>
+                {error}
+            </template>
+        </div>
+    </lightning-card>
+</template>
+
+
+<!-- <template>
+
+    <template if:true={afterTableShow}>
+  
+      <lightning-card title="Quick Import ">
+          <div class="slds-grid">
+              <div class="slds-col slds-p-around_medium">
+                <span>
+                
+                  <lightning-combobox class="slds-m-around_medium"
+                                      label="Select Objects" 
+                                      value={value}
+                                      options={options}
+                                      onchange={handleChange}>
+                  </lightning-combobox>
+             
+                </span>
+              </div>
+            </div>
+  
+            <div class="slds-grid">
+              <div class="slds-col slds-p-around_medium">
+                <span>
+                  
+                 <lightning-input class="slds-m-around_medium"
+                                  label="Choose File"
+                                  type="file"
+                                  placeholder="Select the Object"
+                                  onchange={handleObject}>
+  
+                 </lightning-input>
+                </span>
+              </div>
+            </div>  
+            
+            <div class="slds-grid">
+              <div class="slds-col slds-p-around_medium">
+                <span>
+                 <lightning-button style="margin-left: 400px;"
+                                   label="Submit" 
+                                   variant="success"
+                                   onclick={showDetails}>
+  
+                 </lightning-button>
+                </span>
+              </div>
+            </div>
+  
+          </lightning-card>
+  
+          </template>
+  
+  
+            <template if:true={showAccTable}>
+  
+              <lightning-card title="Account Table">
+  
+  
+            <div class="slds-grid">
+              <div class="slds-col slds-p-around_medium">
+                <span>
+                  <lightning-datatable key-field="Id"
+                                       data={accountData}
+                                       columns={accountColumns}
+                                       onrowaction={onrowactionAccount}>
+                                       
+        
+                  </lightning-datatable>
+                </span>
+              </div>
+            </div>
+  
+          </lightning-card>
+  
+          </template>
+  
+  
+          <template if:true={showContactTable}>
+            
+          <lightning-card title="Contact Table">
+            <div class="slds-grid">
+              <div class="slds-col slds-p-around_medium">
+                <span>
+                  <lightning-datatable key-field="Id"
+                                       data={contactData}
+                                       columns={contactColumns}
+                                       onrowaction={onrowactionContact}>
+                                      
+        
+                  </lightning-datatable>
+                </span>
+              </div>
+            </div>
+          </lightning-card>
+          </template>
+  
+          <template if:true={showLeadTable}>
+            <lightning-card title="Lead Table">
+            <div class="slds-grid">
+              <div class="slds-col slds-p-around_medium">
+                <span>
+                  <lightning-datatable key-field="Id"
+                                       data={leadData}
+                                       columns={leadColumns}
+                                       onrowaction={onrowactionLead}>
+                                       
+                  </lightning-datatable>
+                </span>
+              </div>
+            </div>
+          </lightning-card>
+          </template>
+  
+  
+     
+  </template> -->
