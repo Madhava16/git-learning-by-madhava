@@ -2,37 +2,77 @@ public with sharing class CsvFileImportData {
     public CsvFileImportData() {
 
     }
-    public class AccountWrapper
-    {
-        @auraenabled
-        public string Name{get;set;}
-        @auraenabled
-        public integer NumberOfEmployees{get;set;}
-        @AuraEnabled
-        public List<Contact> Contacts { get; set; }
-    }
-    @auraenabled
-    public static void createAccountContacts(string wrapperText)
-    {
-        system.debug('wrapperText:'+wrapperText);
-        AccountWrapper wrapper=(AccountWrapper)JSON.deserialize(wrapperText,AccountWrapper.class);
-        system.debug('wrapper::'+wrapper);
-        if(wrapper!=null)
-        {
-            Account act=new Account();
-            act.Name=wrapper.Name;
-            act.NumberOfEmployees=wrapper.NumberOfEmployees;
-            insert act;
-            
-            if(wrapper.Contacts!=null)
-            {
-                for(Contact ct:wrapper.Contacts)
-                {
-                    ct.AccountId=act.id;
-                }
-                insert wrapper.Contacts;
-            }
-        }
-    }
+
+   public static List<Sobject> getAccConLead(List<Account> accInsert,Contact conInsert,Lead leadInsert){
+       // public static List<Sobject> getAccConLead(){
+
+        set<Id> idSet= new  Set<Id>();
+
+        //  insert accInsert;
+        
+           for(Account accObj: accInsert){
+             if(accObj.Id!=null)
+               {
+                 idSet.add(accObj.Id);
+              }
+           }
+      List<Sobject> listobj = new List<Sobject>();
+    // Account a=new Account(Name='Test Account1');
+    // Contact c = new Contact(LastName='Test Contact1');
+    // Lead l= new Lead(LastName='Test Lead',Company='Lead Company1');
+      listobj.addAll(accInsert);
+       listobj.add(conInsert);
+        listobj.add(leadInsert);  
+    //    listobj.add(a);
+    //    listobj.add(c);
+    //     listobj.add(l);
+       insert listobj;
+             System.debug('Inserted'+listobj);
+             return [SELECT Id, Type, Name, ShippingStreet, ShippingCity, ShippingState, ShippingPostalCode,  
+                     ShippingCountry, ShippingAddress, Phone FROM Account WHERE Id = :idSet];  
+      
+   }
+
+    
+    // @AuraEnabled
+    //  public static List<Account> getAccounts(List<Account> lstAccToInsert){
+        
+    //      System.debug('list' + lstAccToInsert);        
+		
+    //       set<Id> idSet= new  Set<Id>();
+
+    //        insert lstAccToInsert;
+          
+    //         for(Account accObj: lstAccToInsert){
+    //           if(accObj.Id!=null)
+    //             {
+    //                idSet.add(accObj.Id);
+    //             }
+    //    }
+        
+	//  	return [SELECT Id, Type, Name, ShippingStreet, ShippingCity, ShippingState, ShippingPostalCode, 
+    //              ShippingCountry, ShippingAddress, Phone FROM Account WHERE Id = :idSet];  
+        
+    
+    //  }
+    
+    //  @AuraEnabled
+    //  public static List<Contact> getContacts(List<Contact> lstContactToInsert){
+          
+    //     System.debug('list' + lstContactToInsert); 
+        
+    //        insert lstContactToInsert;
+    //     return lstContactToInsert; 
+    // }	
+    
+     
+    //  @AuraEnabled
+    //  public static List<Lead> getLeads(List<Lead> lstLeadToInsert){
+    //  System.debug('list' + lstLeadToInsert);        
+		 
+    //      insert lstLeadToInsert;
+        
+    //      return lstLeadToInsert;
+    //  }
 }
 
