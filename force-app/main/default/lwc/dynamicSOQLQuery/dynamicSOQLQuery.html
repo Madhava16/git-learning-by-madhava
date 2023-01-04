@@ -1,18 +1,24 @@
 <template>
-    <lightning-card title="Dynamic SOQL Query">
-        <template if:false={isLoading}>
-            <lightning-combobox
-            name="progress"
-            label="Selected SObject"
-            value={selectedSObject}
-            placeholder="Select any SObject"
-            options={allSObjectsMap}
-            onchange={handleChange}
-            required
-    ></lightning-combobox>
-        </template>
-        <template if:true={allfieldsAvailable}>
-            <p class="slds-var-m-vertical_medium">Selected sObject is: <b>{selectedSObject}</b></p>
+    <lightning-card >
+        <div>
+            <template if:true={isLoading}>
+                <div class="exampleHolder">
+                    <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                </div>
+            </template>
+            <template if:false={isLoading}>
+                <div class="slds-var-m-around_medium">
+                    <lightning-combobox
+                            name="progress"
+                            label="Selected SObject"
+                            value={selectedSObject}
+                            placeholder="Select any SObject"
+                            options={allSObjectsMap}
+                            onchange={handleChange}
+                            required
+                    ></lightning-combobox>
+                    <template if:true={areFieldsAvailable}>
+                        <p class="slds-var-m-vertical_medium">Selected sObject is: <b>{selectedSObject}</b></p>
                         <div>
                             <lightning-input type="number" placeholder="Limit" label="Limit" class="limitClass"></lightning-input>
                         </div>
@@ -37,10 +43,10 @@
                             <lightning-button value="Query" class="slds-var-m-horizontal_medium" onclick={handleClick} label="Query" disabled={showButton}></lightning-button>
                         </div>
                     </template>
-                    <template if:true={isFieldsError}>
-                        <p>Some Error</p>
-                    
-                </div>
+                <template if:true={isFieldsError}>
+                    <p>Some Error</p>
+                </template>
+            </div>
             </template>
             <template if:true={openModal}>
                 <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium" aria-labelledby="modal-heading-01" aria-modal="true">
